@@ -1,20 +1,38 @@
-import { View, Text, FlatList, Image } from "react-native";
 import React from "react";
+import { View, Text, FlatList, Image } from "react-native";
 import tailwind from "twrnc";
 
 const ItemCards = ({ data, config }: any) => {
+  const baseUrl = config ? config.value : null;
+
   const renderComCards = ({ item }: any) => {
     return (
-      <View>
-        <Image source={{ uri: item.imageurl }} style={tailwind`w-20 h-20`} />
-        <Text>{item.title}</Text>
+      <View style={tailwind`w-1/5 p-2`}>
+        <Image
+          source={{ uri: baseUrl + item.imageurl }}
+          style={tailwind`w-20 h-20 rounded-md`}
+        />
+        <Text
+          style={tailwind`text-bold text-lg mt-2 text-center`}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
+          {item.title}
+        </Text>
+        <Text
+          style={tailwind`mt-2 text-sm text-gray-500`}
+          numberOfLines={3}
+          ellipsizeMode="tail"
+        >
+          {item.pagedescription}
+        </Text>
       </View>
     );
   };
 
   return data ? (
-    <View>
-      <FlatList data={data} renderItem={renderComCards} />
+    <View style={tailwind`flex-row flex-wrap`}>
+      <FlatList data={data} renderItem={renderComCards} numColumns={5} />
     </View>
   ) : null;
 };

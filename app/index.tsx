@@ -12,12 +12,19 @@ import ItemsCat from "../components/ItemsCat";
 import { translate } from "../translate";
 import ItemCards from "../components/ItemCards";
 
+type ConfigItem = {
+  config_key: string;
+};
+
 const Page = () => {
   const [data, setData] = useRecoilState(dataState);
   const homebanner = useRecoilValue(homedata.homeBanner);
   const menuCat = useRecoilValue(homedata.menuCategories);
   const menuCatItem = useRecoilValue(homedata.menuCategoriesItem);
-  const configData = useRecoilValue(homedata.config);
+  const configData: ConfigItem[] = useRecoilValue(homedata.config);
+  const domainConfigs = configData?.find(
+    (item) => item.config_key === "Domain"
+  );
 
   useEffect(() => {
     const fetchDataFromAPI = async () => {
@@ -30,7 +37,7 @@ const Page = () => {
   }, [setData]);
 
   const renderCat = ({ item }: any) => {
-    const index = item?.id;
+    const index = item?.id - 1;
 
     if (index >= 0 && index < menuCatItem.length) {
       const categoryData = menuCatItem[index];
@@ -38,7 +45,7 @@ const Page = () => {
       return (
         <View>
           <ItemsCat data={item} />
-          <ItemCards data={categoryData} config={configData} />
+          <ItemCards data={categoryData} config={domainConfigs} />
         </View>
       );
     } else {
