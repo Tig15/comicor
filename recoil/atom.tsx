@@ -43,4 +43,20 @@ export const homedata = {
       return data?.["rank_categories"];
     },
   }),
+
+  rankCategoriesItem: selector({
+    key: "rankCategoriesItem",
+    get: ({ get }) => {
+      const data = get(dataState);
+      return data?.["rank_categories_items"];
+    },
+  }),
+
+  config: selector({
+    key: "configData",
+    get: ({ get }) => {
+      const data = get(dataState);
+      return data?.["config"];
+    },
+  }),
 };

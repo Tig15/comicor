@@ -17,6 +17,7 @@ const Page = () => {
   const homebanner = useRecoilValue(homedata.homeBanner);
   const menuCat = useRecoilValue(homedata.menuCategories);
   const menuCatItem = useRecoilValue(homedata.menuCategoriesItem);
+  const configData = useRecoilValue(homedata.config);
 
   useEffect(() => {
     const fetchDataFromAPI = async () => {
@@ -29,15 +30,20 @@ const Page = () => {
   }, [setData]);
 
   const renderCat = ({ item }: any) => {
-    const categoryItem = menuCatItem.find(
-      ({ menuItem }: any) => menuItem?.categoryId === item.id
-    );
-    return (
-      <View>
-        <ItemsCat data={item} />
-        {categoryItem && <ItemCards data={categoryItem} />}
-      </View>
-    );
+    const index = item?.id;
+
+    if (index >= 0 && index < menuCatItem.length) {
+      const categoryData = menuCatItem[index];
+
+      return (
+        <View>
+          <ItemsCat data={item} />
+          <ItemCards data={categoryData} config={configData} />
+        </View>
+      );
+    } else {
+      return null;
+    }
   };
 
   return (
