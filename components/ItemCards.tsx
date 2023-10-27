@@ -2,8 +2,9 @@ import React from "react";
 import { View, Text, FlatList, Image } from "react-native";
 import tailwind from "twrnc";
 
-const ItemCards = ({ data, config }: any) => {
-  const baseUrl = config ? config.value : null;
+const ItemCards = ({ data, domain, typeOne }: any) => {
+  const baseUrl = domain ? domain.value : null;
+  const value = typeOne ? typeOne.value : null;
 
   const renderComCards = ({ item }: any) => {
     return (
@@ -32,7 +33,11 @@ const ItemCards = ({ data, config }: any) => {
 
   return data ? (
     <View style={tailwind`flex-row flex-wrap`}>
-      <FlatList data={data} renderItem={renderComCards} numColumns={5} />
+      <FlatList
+        data={data?.slice(0, value)}
+        renderItem={renderComCards}
+        numColumns={5}
+      />
     </View>
   ) : null;
 };

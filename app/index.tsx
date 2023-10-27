@@ -26,6 +26,10 @@ const Page = () => {
     (item) => item.config_key === "Domain"
   );
 
+  const type1Data = configData?.find(
+    (item) => item.config_key === "HomeMenuType1DisplayData"
+  );
+
   useEffect(() => {
     const fetchDataFromAPI = async () => {
       const apiData = await fetchData();
@@ -45,7 +49,11 @@ const Page = () => {
       return (
         <View>
           <ItemsCat data={item} />
-          <ItemCards data={categoryData} config={domainConfigs} />
+          <ItemCards
+            data={categoryData}
+            domain={domainConfigs}
+            typeOne={type1Data}
+          />
         </View>
       );
     } else {
