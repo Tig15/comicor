@@ -13,7 +13,7 @@ const HomeHead = () => {
         />
         <View style={tailwind`items-center gap-5 mr-2 flex-row`}>
           <TouchableOpacity onPress={() => console.log("Clicked Search")}>
-            <MaterialCommunityIcons name="magnify" size={26} color="black" />
+            <MaterialCommunityIcons name="magnify" size={26} color="gray" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => console.log("Clicked Account")}>
             <MaterialCommunityIcons

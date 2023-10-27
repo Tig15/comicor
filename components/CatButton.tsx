@@ -1,31 +1,31 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, ViewStyle } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-type IconName =
-  | "symbol"
-  | "function"
-  | "key"
-  | "head"
-  | "link"
-  | "email"
-  | "image"
-  | "string";
+import tailwind from "twrnc";
 
 interface CatProps {
-  iconname: IconName;
+  iconname: string;
   size: number;
   color: string;
   title: string;
+  style: ViewStyle;
 }
 
-const CatButton: React.FC<CatProps> = ({ iconname, size, color, title }) => {
+const CatButton: React.FC<CatProps> = ({
+  iconname,
+  size,
+  color,
+  title,
+  style,
+}) => {
   return (
-    <View>
-      <TouchableOpacity>
+    <View style={tailwind`gap-1 `}>
+      <TouchableOpacity style={style}>
         <MaterialCommunityIcons name={iconname} size={size} color={color} />
       </TouchableOpacity>
-      <Text>{title}</Text>
+      <Text style={tailwind`w-16 font-semibold text-xs ml-[-12px]`}>
+        {title}
+      </Text>
     </View>
   );
 };
