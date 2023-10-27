@@ -9,27 +9,24 @@ type IconName =
   | "head"
   | "link"
   | "email"
-  | "image";
+  | "image"
+  | "string";
 
 interface CatProps {
   iconname: IconName;
   size: number;
   color: string;
-  tileStyle: string;
+  title: string;
 }
 
-const CatButton: React.FC<CatProps> = ({
-  iconname,
-  size,
-  color,
-  tileStyle,
-}) => {
+const CatButton: React.FC<CatProps> = ({ iconname, size, color, title }) => {
   return (
-    <TouchableOpacity>
-      <View style={tileStyle}>
+    <View>
+      <TouchableOpacity>
         <MaterialCommunityIcons name={iconname} size={size} color={color} />
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+      <Text>{title}</Text>
+    </View>
   );
 };
 

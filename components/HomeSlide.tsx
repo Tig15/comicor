@@ -30,15 +30,6 @@ const HomeSlide = ({ data }: any) => {
   return (
     <View style={tailwind`mt-2`}>
       <View style={tailwind`mt-2 bg-gray-100`}>
-        {/* <Carousel
-          loop
-          width={screenWidth}
-          height={300}
-          autoPlay={false}
-          data={data}
-          onSnapToItem={onSnapToItem}
-          renderItem={renderCarouselItem}
-        /> */}
         <Carousel
           data={data}
           renderItem={renderCarouselItem}
