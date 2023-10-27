@@ -27,7 +27,7 @@ const HomeSlide = ({ data }: any) => {
     setActiveSlide(index);
   };
 
-  return (
+  return data ? (
     <View style={tailwind`mt-2`}>
       <View style={tailwind`mt-2 bg-gray-100`}>
         <Carousel
@@ -46,7 +46,7 @@ const HomeSlide = ({ data }: any) => {
         />
       </View>
     </View>
-  );
+  ) : null;
 };
 
 export default HomeSlide;

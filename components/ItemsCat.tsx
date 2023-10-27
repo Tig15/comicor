@@ -1,14 +1,20 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import tailwind from "twrnc";
 
 const ItemsCat = ({ data }: any) => {
   return (
-    <View>
-      <View>
-        <MaterialCommunityIcons name="line" />
-        <Text>{data.title}</Text>
+    <View style={tailwind`flex-row items-center justify-between`}>
+      <View style={tailwind`flex-row ml-[-22px]`}>
+        <AntDesign name="pause" size={40} color="red" />
+        <Text style={tailwind`text-base mt-2`}>{data.title}</Text>
       </View>
+
+      <TouchableOpacity style={tailwind`flex-row items-center`}>
+        <Text style={tailwind`text-xs`}>More</Text>
+        <MaterialCommunityIcons name="chevron-right" size={16} />
+      </TouchableOpacity>
     </View>
   );
 };

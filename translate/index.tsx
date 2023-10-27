@@ -6,7 +6,7 @@ i18n.translations = {
   ch: chTranslate,
 };
 
-i18n.locale = "en";
+i18n.locale = "ch";
 
 export function translate(key: string) {
   return i18n.t(key);

@@ -9,11 +9,14 @@ import HomeHead from "../components/HomeHead";
 import { fetchData } from "../api/api";
 import CatButton from "../components/CatButton";
 import ItemsCat from "../components/ItemsCat";
+import { translate } from "../translate";
+import ItemCards from "../components/ItemCards";
 
 const Page = () => {
   const [data, setData] = useRecoilState(dataState);
   const homebanner = useRecoilValue(homedata.homeBanner);
   const menuCat = useRecoilValue(homedata.menuCategories);
+  const menuCatItem = useRecoilValue(homedata.menuCategoriesItem);
 
   useEffect(() => {
     const fetchDataFromAPI = async () => {
@@ -26,9 +29,13 @@ const Page = () => {
   }, [setData]);
 
   const renderCat = ({ item }: any) => {
+    const categoryItem = menuCatItem.find(
+      ({ menuItem }: any) => menuItem?.categoryId === item.id
+    );
     return (
       <View>
         <ItemsCat data={item} />
+        {categoryItem && <ItemCards data={categoryItem} />}
       </View>
     );
   };
@@ -38,41 +45,37 @@ const Page = () => {
       <View>
         <HomeHead />
         <HomeSlide data={homebanner} />
-        <View style={tailwind`flex-row gap-6 mx-18 my-4`}>
+        <View style={tailwind`flex-row gap-10 mx-17 my-4`}>
           <CatButton
             iconname={"view-grid-outline"}
             size={24}
             color={"white"}
-            title={"Hello world"}
+            title={translate("home_category")}
             style={tailwind`w-8 h-8 bg-red-300 rounded-full px-1 py-1`}
           />
           <CatButton
             iconname={"equalizer"}
             size={24}
             color={"white"}
-            title={""}
+            title={translate("home_ranking")}
             style={tailwind`w-8 h-8 bg-blue-300 rounded-full px-1 py-1`}
           />
           <CatButton
             iconname={"alarm"}
             size={24}
             color={"white"}
-            title={""}
+            title={translate("home_latest")}
             style={tailwind`w-8 h-8 bg-green-300 rounded-full px-1 py-1`}
           />
           <CatButton
             iconname={"wallet-outline"}
             size={24}
             color={"white"}
-            title={""}
+            title={translate("home_history")}
             style={tailwind`w-8 h-8 bg-purple-300 rounded-full px-1 py-1`}
           />
         </View>
-        <FlatList
-          data={menuCat}
-          renderItem={renderCat}
-          keyExtractor={({ item }: any) => item?.id.toString()}
-        />
+        <FlatList data={menuCat} renderItem={renderCat} />
       </View>
     </ScrollView>
   );

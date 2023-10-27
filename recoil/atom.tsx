@@ -26,7 +26,13 @@ export const homedata = {
     key: "menuCategoriesItem",
     get: ({ get }) => {
       const data = get(dataState);
-      return data?.["menu_categories_item"];
+      const menuCategoriesItemObject = data?.["menu_categories_items"];
+
+      const menuCategoriesItemArray = menuCategoriesItemObject
+        ? Object.values(menuCategoriesItemObject)
+        : [];
+
+      return menuCategoriesItemArray;
     },
   }),
 

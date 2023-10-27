@@ -23,9 +23,7 @@ const CatButton: React.FC<CatProps> = ({
       <TouchableOpacity style={style}>
         <MaterialCommunityIcons name={iconname} size={size} color={color} />
       </TouchableOpacity>
-      <Text style={tailwind`w-16 font-semibold text-xs ml-[-12px]`}>
-        {title}
-      </Text>
+      <Text style={tailwind` font-semibold text-xs text-center `}>{title}</Text>
     </View>
   );
 };
