@@ -8,7 +8,9 @@ const screenWidth = Dimensions.get("screen").width;
 const HomeSlide = ({ data }: any) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
-  useEffect(() => {}, [data]);
+  useEffect(() => {
+    console.log("Data inside slide", data);
+  }, [data]);
 
   const renderCarouselItem = ({ item, index }: any) => {
     return (
@@ -25,15 +27,18 @@ const HomeSlide = ({ data }: any) => {
     setActiveSlide(index);
   };
 
-  return data ? (
-    <View style={tailwind`mt-2 bg-gray-100`}>
-      <View>
-        <Image
-          source={require("../assets/images/dms-full-logo.png")}
-          style={tailwind`w-40 h-40`}
-        />
-      </View>
+  return (
+    <View style={tailwind`mt-2`}>
       <View style={tailwind`mt-2 bg-gray-100`}>
+        {/* <Carousel
+          loop
+          width={screenWidth}
+          height={300}
+          autoPlay={false}
+          data={data}
+          onSnapToItem={onSnapToItem}
+          renderItem={renderCarouselItem}
+        /> */}
         <Carousel
           data={data}
           renderItem={renderCarouselItem}
@@ -42,7 +47,7 @@ const HomeSlide = ({ data }: any) => {
           onSnapToItem={onSnapToItem}
         />
         <Pagination
-          dotsLength={data.length}
+          dotsLength={data?.length}
           activeDotIndex={activeSlide}
           containerStyle={tailwind`mt-1 absolute bottom-[-23px] left-[25%]`}
           dotStyle={tailwind`w-6 h-3 bg-red-500 rounded-lg`}
@@ -50,7 +55,7 @@ const HomeSlide = ({ data }: any) => {
         />
       </View>
     </View>
-  ) : null;
+  );
 };
 
 export default HomeSlide;
