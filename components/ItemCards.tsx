@@ -16,28 +16,30 @@ const ItemCards = ({
 
   const renderComCards = ({ item }: any) => {
     return (
-      <View style={tailwind`${cardStyles}`}>
-        <View style={tailwind`w-[40px] p-2`}>
-          <Image
-            source={{ uri: baseUrl + item.imageurl }}
-            style={tailwind`${imageCard}`}
-          />
-        </View>
-        <View style={tailwind`w-45 items-center`}>
-          <Text
-            style={tailwind`font-bold text-xs ml-1 text-center max-w-xs`}
-            numberOfLines={1}
-            ellipsizeMode="tail"
-          >
-            {item.title}
-          </Text>
-          <Text
-            style={tailwind`mt-1 text-xs text-gray-500 ml-2 max-w-xs`}
-            numberOfLines={1}
-            ellipsizeMode="tail"
-          >
-            {item.pagedescription}
-          </Text>
+      <View>
+        <View style={tailwind`${cardStyles}`}>
+          <View style={tailwind`w-[40px] p-2`}>
+            <Image
+              source={{ uri: baseUrl + item.imageurl }}
+              style={tailwind`${imageCard}`}
+            />
+          </View>
+          <View style={tailwind`w-45 items-center`}>
+            <Text
+              style={tailwind`font-bold text-xs ml-1 text-center max-w-xs`}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {item.title}
+            </Text>
+            <Text
+              style={tailwind`mt-1 text-xs text-gray-500 ml-2 max-w-xs`}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {item.pagedescription}
+            </Text>
+          </View>
         </View>
       </View>
     );

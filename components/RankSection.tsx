@@ -1,56 +1,46 @@
-import { View, Text, FlatList, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  FlatList,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+} from "react-native";
 import React, { useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import tailwind from "twrnc";
 import { translate } from "../translate";
 import { ScrollView } from "react-native-virtualized-view";
+import Carousel, { Pagination } from "react-native-snap-carousel";
+
+const screenWidth = Dimensions.get("window").width;
 
 const RankSection = ({ data, items, rankDisplay, domain }: any) => {
   const [selectedCategory, setSelectedCategory] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  const onSnapToItem = (index: number) => {
+    setActiveSlide(index);
+  };
 
   const baseUrl = domain ? domain.value : null;
   const dataValue = rankDisplay ? rankDisplay.value : null;
   const rankLength = data?.length;
 
-  const renderRank = ({ item, index }: any) => {
-    const onPressCategory = () => {
-      setSelectedCategory(index);
-    };
-
-    return (
-      <TouchableOpacity
-        style={[
-          tailwind`p-1 mx-2 mr-2 border border-black rounded`,
-          selectedCategory === index && tailwind`bg-blue-500`,
-        ]}
-        onPress={onPressCategory}
-      >
-        <Text style={tailwind`text-xs`}>{item.title}</Text>
-      </TouchableOpacity>
-    );
-  };
-
   const renderRankItems = ({ item }: any) => {
-    const selectedItem =
-      selectedCategory !== null ? item[selectedCategory] : [];
-
-    const mainData = Array.isArray(selectedItem)
-      ? selectedItem
-      : [selectedItem];
+    const newData = item.slice(0, dataValue);
 
     return (
       <View>
-        {mainData.slice(0, dataValue).map((nestedItem: any, index: number) => (
-          <View
-            style={tailwind`p-2 mx-2 mt-2 mb-2 flex-row items-center gap-2`}
-          >
+        {newData.map((nestedItem: any, index: number) => (
+          <View style={tailwind`p-1 mx-2  mb-2 flex-row items-center gap-2`}>
             <View>
               <Image
                 source={{ uri: baseUrl + nestedItem.imageurl }}
                 style={tailwind`w-30 h-40 rounded`}
               />
             </View>
-            <View style={tailwind`w-40`}>
+            <View style={tailwind`w-60`}>
               <Text
                 style={tailwind`text-base font-bold`}
                 numberOfLines={1}
@@ -75,29 +65,35 @@ const RankSection = ({ data, items, rankDisplay, domain }: any) => {
   return (
     <View>
       <View style={tailwind`flex-row justify-between`}>
-        <View style={tailwind`mt-3 flex-row ml-[-22px]`}>
+        <View style={tailwind` flex-row ml-[-22px]`}>
           <AntDesign name="pause" size={40} color="red" />
           <Text style={tailwind`text-base mt-2`}>
             {translate("home_ranking")}
           </Text>
         </View>
-        <View style={tailwind`mt-8`}>
-          <FlatList
-            data={data}
-            keyExtractor={(item, index) => index.toString()}
-            horizontal
-            renderItem={renderRank}
-          />
-        </View>
-      </View>
-      <ScrollView horizontal>
-        <FlatList
-          data={items.slice(0, rankLength)}
-          renderItem={renderRankItems}
-          numColumns={4}
-          keyExtractor={(item, index) => index.toString()}
+        <Pagination
+          dotsLength={rankLength}
+          activeDotIndex={activeSlide}
+          renderDots={(activeIndex) =>
+            data.map((item: any) => (
+              <TouchableOpacity
+                style={tailwind`p-1 mx-1 mr-2 border border-black rounded`}
+              >
+                <Text style={tailwind`text-xs`}>{item.title}</Text>
+              </TouchableOpacity>
+            ))
+          }
+          containerStyle={tailwind`ml-2 mt-[-12px]`}
         />
-      </ScrollView>
+      </View>
+      <Carousel
+        data={items.slice(0, rankLength)}
+        sliderWidth={screenWidth}
+        itemWidth={screenWidth}
+        onSnapToItem={onSnapToItem}
+        renderItem={renderRankItems}
+        loop
+      />
     </View>
   );
 };

@@ -36,6 +36,7 @@ const HomeSlide = ({ data }: any) => {
           sliderWidth={screenWidth}
           itemWidth={screenWidth * 1.1}
           onSnapToItem={onSnapToItem}
+          loop
         />
         <Pagination
           dotsLength={data?.length}

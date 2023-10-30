@@ -35,7 +35,7 @@ const Page = () => {
   );
 
   const type2Data = configData?.find(
-    (item) => item.config_key === "HomeMenuType2sDisplayData"
+    (item) => item.config_key === "HomeMenuType2DisplayData"
   );
 
   const rankData = configData?.find(
@@ -61,10 +61,10 @@ const Page = () => {
     if (index >= 3) {
       cardStyles = "w-52 h-75";
       cardNumColumns = 10;
-      imageCard = "w-45 h-60 rounded-md";
+      imageCard = "w-45 h-60 rounded-md ";
     } else {
       cardStyles = "w-50";
-      imageCard = "w-45 aspect-1 rounded-md";
+      imageCard = "w-45 aspect-1 rounded-md ";
     }
 
     if (index >= 0 && index < menuCatItem.length) {
@@ -123,13 +123,27 @@ const Page = () => {
             style={tailwind`w-8 h-8 bg-purple-300 rounded-full px-1 py-1`}
           />
         </View>
-        <FlatList data={menuCat} renderItem={renderCat} />
-        <RankSection
-          data={rankCat}
-          items={rankCatItem}
-          rankDisplay={rankData}
-          domain={domainConfigs}
-        />
+
+        <View style={tailwind`bg-gray-400`}>
+          <View style={tailwind`bg-white mt-2`}>
+            <FlatList
+              data={menuCat}
+              renderItem={renderCat}
+              style={tailwind`bg-gray`}
+            />
+          </View>
+        </View>
+
+        <View style={tailwind`bg-gray-400`}>
+          <View style={tailwind`bg-white mt-2`}>
+            <RankSection
+              data={rankCat}
+              items={rankCatItem}
+              rankDisplay={rankData}
+              domain={domainConfigs}
+            />
+          </View>
+        </View>
       </View>
     </ScrollView>
   );
