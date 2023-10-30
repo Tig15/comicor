@@ -11,6 +11,7 @@ import CatButton from "../components/CatButton";
 import ItemsCat from "../components/ItemsCat";
 import { translate } from "../translate";
 import ItemCards from "../components/ItemCards";
+import RankSection from "../components/RankSection";
 
 type ConfigItem = {
   config_key: string;
@@ -22,12 +23,23 @@ const Page = () => {
   const menuCat = useRecoilValue(homedata.menuCategories);
   const menuCatItem = useRecoilValue(homedata.menuCategoriesItem);
   const configData: ConfigItem[] = useRecoilValue(homedata.config);
+  const rankCat = useRecoilValue(homedata.rankCategories);
+  const rankCatItem = useRecoilValue(homedata.menuCategoriesItem);
+
   const domainConfigs = configData?.find(
     (item) => item.config_key === "Domain"
   );
 
   const type1Data = configData?.find(
     (item) => item.config_key === "HomeMenuType1DisplayData"
+  );
+
+  const type2Data = configData?.find(
+    (item) => item.config_key === "HomeMenuType2sDisplayData"
+  );
+
+  const rankData = configData?.find(
+    (item) => item.config_key === "HomeMenuRankDisplayData"
   );
 
   useEffect(() => {
@@ -42,6 +54,18 @@ const Page = () => {
 
   const renderCat = ({ item }: any) => {
     const index = item?.id - 1;
+    let cardStyles = "";
+    let imageCard = "";
+    let cardNumColumns = 5;
+
+    if (index >= 3) {
+      cardStyles = "w-52 h-75";
+      cardNumColumns = 10;
+      imageCard = "w-45 h-60 rounded-md";
+    } else {
+      cardStyles = "w-50";
+      imageCard = "w-45 aspect-1 rounded-md";
+    }
 
     if (index >= 0 && index < menuCatItem.length) {
       const categoryData = menuCatItem[index];
@@ -53,6 +77,9 @@ const Page = () => {
             data={categoryData}
             domain={domainConfigs}
             typeOne={type1Data}
+            cardStyles={cardStyles}
+            cardNumColumns={cardNumColumns}
+            imageCard={imageCard}
           />
         </View>
       );
@@ -97,6 +124,12 @@ const Page = () => {
           />
         </View>
         <FlatList data={menuCat} renderItem={renderCat} />
+        <RankSection
+          data={rankCat}
+          items={rankCatItem}
+          rankDisplay={rankData}
+          domain={domainConfigs}
+        />
       </View>
     </ScrollView>
   );
