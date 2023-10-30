@@ -16,24 +16,24 @@ const ItemCards = ({
 
   const renderComCards = ({ item }: any) => {
     return (
-      <View>
-        <View style={tailwind`${cardStyles}`}>
-          <View style={tailwind`w-[40px] p-2`}>
+      <View style={tailwind`${cardStyles}`}>
+        <View style={tailwind`bg-green-200`}>
+          <View style={tailwind`p-2`}>
             <Image
               source={{ uri: baseUrl + item.imageurl }}
               style={tailwind`${imageCard}`}
             />
           </View>
-          <View style={tailwind`w-45 items-center`}>
+          <View style={tailwind` items-center`}>
             <Text
-              style={tailwind`font-bold text-xs ml-1 text-center max-w-xs`}
+              style={tailwind`font-bold text-base ml-1 text-center max-w-xs`}
               numberOfLines={1}
               ellipsizeMode="tail"
             >
               {item.title}
             </Text>
             <Text
-              style={tailwind`mt-1 text-xs text-gray-500 ml-2 max-w-xs`}
+              style={tailwind` text-base text-gray-400 ml-1 max-w-xs`}
               numberOfLines={1}
               ellipsizeMode="tail"
             >
@@ -49,12 +49,13 @@ const ItemCards = ({
     <ScrollView
       horizontal={true}
       showsHorizontalScrollIndicator={false}
-      style={tailwind`mb-5`}
+      style={tailwind`mb-5 `}
     >
       <FlatList
         data={data?.slice(0, value)}
         renderItem={renderComCards}
         numColumns={cardNumColumns}
+        columnWrapperStyle={tailwind`gap-2 w-1/2`}
       />
     </ScrollView>
   ) : null;

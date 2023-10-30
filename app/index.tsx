@@ -56,31 +56,37 @@ const Page = () => {
     const index = item?.id - 1;
     let cardStyles = "";
     let imageCard = "";
+
     let cardNumColumns = 5;
 
     if (index >= 3) {
-      cardStyles = "w-52 h-75";
+      cardStyles = "w-30 h-auto ";
       cardNumColumns = 10;
-      imageCard = "w-45 h-60 rounded-md ";
+      imageCard = "w-25 h-32 rounded-md";
     } else {
-      cardStyles = "w-50";
-      imageCard = "w-45 aspect-1 rounded-md ";
+      cardStyles = "h-auto mb-1";
+      imageCard = "w-[40%] h-30 rounded-md";
     }
 
     if (index >= 0 && index < menuCatItem.length) {
       const categoryData = menuCatItem[index];
 
       return (
-        <View>
+        <View
+          style={tailwind`bg-white py-[1.325rem] p-[10px] border-y border-gray-500 border-t-0 mb-4`}
+        >
           <ItemsCat data={item} />
-          <ItemCards
-            data={categoryData}
-            domain={domainConfigs}
-            typeOne={type1Data}
-            cardStyles={cardStyles}
-            cardNumColumns={cardNumColumns}
-            imageCard={imageCard}
-          />
+
+          <View style={tailwind`mt-3`}>
+            <ItemCards
+              data={categoryData}
+              domain={domainConfigs}
+              typeOne={type1Data}
+              cardStyles={cardStyles}
+              cardNumColumns={cardNumColumns}
+              imageCard={imageCard}
+            />
+          </View>
         </View>
       );
     } else {
@@ -96,53 +102,42 @@ const Page = () => {
         <View style={tailwind`flex-row gap-10 mx-17 my-4`}>
           <CatButton
             iconname={"view-grid-outline"}
-            size={24}
+            size={26}
             color={"white"}
             title={translate("home_category")}
-            style={tailwind`w-8 h-8 bg-red-300 rounded-full px-1 py-1`}
+            style={tailwind`w-9 h-9 bg-yellow-300 rounded-full px-[5px] py-[5px]`}
           />
           <CatButton
             iconname={"equalizer"}
-            size={24}
+            size={26}
             color={"white"}
             title={translate("home_ranking")}
-            style={tailwind`w-8 h-8 bg-blue-300 rounded-full px-1 py-1`}
+            style={tailwind`w-9 h-9 bg-blue-300 rounded-full px-[5px] py-[5px]`}
           />
           <CatButton
             iconname={"alarm"}
-            size={24}
+            size={26}
             color={"white"}
             title={translate("home_latest")}
-            style={tailwind`w-8 h-8 bg-green-300 rounded-full px-1 py-1`}
+            style={tailwind`w-9 h-9 bg-red-300 rounded-full px-[5px] py-[5px]`}
           />
           <CatButton
             iconname={"wallet-outline"}
-            size={24}
+            size={26}
             color={"white"}
             title={translate("home_history")}
-            style={tailwind`w-8 h-8 bg-purple-300 rounded-full px-1 py-1`}
+            style={tailwind`w-9 h-9 bg-purple-300 rounded-full px-[5px] py-[5px]`}
           />
         </View>
+        <View style={tailwind`bg-gray-100`}>
+          <FlatList data={menuCat} renderItem={renderCat} />
 
-        <View style={tailwind`bg-gray-400`}>
-          <View style={tailwind`bg-white mt-2`}>
-            <FlatList
-              data={menuCat}
-              renderItem={renderCat}
-              style={tailwind`bg-gray`}
-            />
-          </View>
-        </View>
-
-        <View style={tailwind`bg-gray-400`}>
-          <View style={tailwind`bg-white mt-2`}>
-            <RankSection
-              data={rankCat}
-              items={rankCatItem}
-              rankDisplay={rankData}
-              domain={domainConfigs}
-            />
-          </View>
+          <RankSection
+            rankData={rankCat}
+            rankItems={rankCatItem}
+            rankDisplay={rankData}
+            domain={domainConfigs}
+          />
         </View>
       </View>
     </ScrollView>

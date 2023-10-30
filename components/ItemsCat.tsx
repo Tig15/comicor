@@ -1,20 +1,24 @@
 import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
-import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign, Entypo } from "@expo/vector-icons";
 import tailwind from "twrnc";
 import { translate } from "../translate";
 
 const ItemsCat = ({ data }: any) => {
   return (
     <View style={tailwind`flex-row items-center justify-between`}>
-      <View style={tailwind`flex-row ml-[-22px]`}>
-        <AntDesign name="pause" size={40} color="red" />
-        <Text style={tailwind`text-base mt-2`}>{data.title}</Text>
+      <View style={tailwind`flex-row ml-2 items-center`}>
+        <View style={tailwind`w-1 h-[28px] bg-red-500 absolute rounded-full`} />
+        <Text style={tailwind`text-xl font-bold ml-3`}>{data.title}</Text>
       </View>
 
-      <TouchableOpacity style={tailwind`flex-row items-center mt-3`}>
-        <Text style={tailwind`text-xs`}>{translate("home_more")}</Text>
-        <MaterialCommunityIcons name="chevron-right" size={16} />
+      <TouchableOpacity
+        style={tailwind`flex-row items-center justify-center gap-1 mr-2 `}
+      >
+        <Text style={tailwind`text-lg font-bold text-gray-400 `}>
+          {translate("home_more")}
+        </Text>
+        <Entypo name="chevron-thin-right" size={14} color="black" />
       </TouchableOpacity>
     </View>
   );
