@@ -62,10 +62,10 @@ const Page = () => {
     if (index >= 3) {
       cardStyles = "w-30 h-auto ";
       cardNumColumns = 10;
-      imageCard = "w-25 h-32 rounded-md";
+      imageCard = "w-full h-30 rounded-md";
     } else {
-      cardStyles = "h-auto mb-1";
-      imageCard = "w-[40%] h-30 rounded-md";
+      cardStyles = "w-41 mb-1";
+      imageCard = "w-full aspect-1.2 rounded-md";
     }
 
     if (index >= 0 && index < menuCatItem.length) {

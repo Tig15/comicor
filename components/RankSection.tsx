@@ -16,13 +16,9 @@ import Carousel, { Pagination } from "react-native-snap-carousel";
 const screenWidth = Dimensions.get("window").width;
 
 const RankSection = ({ rankData, rankItems, rankDisplay, domain }: any) => {
-  const [selectedCategory, setSelectedCategory] = useState(0);
   const [activeSlide, setActiveSlide] = useState(0);
 
-  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
-
   const onSnapToItem = (index: number) => {
-    console.log("Index of Data", index);
     setActiveSlide(index);
   };
 
@@ -88,7 +84,7 @@ const RankSection = ({ rankData, rankItems, rankDisplay, domain }: any) => {
                     : tailwind`border-[0.5px] border-gray-300 mt-[12px]`
                 }
               >
-                <TouchableOpacity style={tailwind`p-[6px] items-center mr-2 `}>
+                <TouchableOpacity style={tailwind`p-[6px] items-center mr-2`}>
                   <Text style={tailwind`text-xs`}>{item.title}</Text>
                 </TouchableOpacity>
               </View>
