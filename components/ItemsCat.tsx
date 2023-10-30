@@ -7,7 +7,7 @@ import { translate } from "../translate";
 const ItemsCat = ({ data }: any) => {
   return (
     <View style={tailwind`flex-row items-center justify-between`}>
-      <View style={tailwind`flex-row ml-2 items-center`}>
+      <View style={tailwind`flex-row ml-1 items-center`}>
         <View style={tailwind`w-1 h-[28px] bg-red-500 absolute rounded-full`} />
         <Text style={tailwind`text-xl font-bold ml-3`}>{data.title}</Text>
       </View>

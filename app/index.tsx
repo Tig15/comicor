@@ -12,6 +12,7 @@ import ItemsCat from "../components/ItemsCat";
 import { translate } from "../translate";
 import ItemCards from "../components/ItemCards";
 import RankSection from "../components/RankSection";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type ConfigItem = {
   config_key: string;
@@ -60,11 +61,11 @@ const Page = () => {
     let cardNumColumns = 5;
 
     if (index >= 3) {
-      cardStyles = "w-30 h-auto ";
+      cardStyles = "w-30 ml-[-6px] h-auto ";
       cardNumColumns = 10;
-      imageCard = "w-full h-30 rounded-md";
+      imageCard = "w-full h-38 rounded-md";
     } else {
-      cardStyles = "w-41 mb-1";
+      cardStyles = "w-40 ml-[-6px] mb-1";
       imageCard = "w-full aspect-1.2 rounded-md";
     }
 
@@ -73,11 +74,11 @@ const Page = () => {
 
       return (
         <View
-          style={tailwind`bg-white py-[1.325rem] p-[10px] border-y border-gray-500 border-t-0 mb-4`}
+          style={tailwind`bg-white py-[1.325rem] p-[12px] border-y border-gray-500 border-t-0 mb-4`}
         >
           <ItemsCat data={item} />
 
-          <View style={tailwind`mt-3`}>
+          <View style={tailwind`mt-2`}>
             <ItemCards
               data={categoryData}
               domain={domainConfigs}
@@ -95,8 +96,8 @@ const Page = () => {
   };
 
   return (
-    <ScrollView style={tailwind`bg-white`}>
-      <View>
+    <SafeAreaView>
+      <ScrollView style={tailwind`bg-white`}>
         <HomeHead />
         <HomeSlide data={homebanner} />
         <View style={tailwind`flex-row gap-10 mx-17 my-4`}>
@@ -139,8 +140,8 @@ const Page = () => {
             domain={domainConfigs}
           />
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

@@ -55,7 +55,6 @@ const ItemCards = ({
         data={data?.slice(0, value)}
         renderItem={renderComCards}
         numColumns={cardNumColumns}
-        columnWrapperStyle={tailwind`gap-1`}
       />
     </ScrollView>
   ) : null;

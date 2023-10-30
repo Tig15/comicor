@@ -8,7 +8,6 @@ import Colors from "../constants/Colors";
 const MainLayout = () => {
   return (
     <RecoilRoot>
-      <StatusBar hidden />
       <Stack screenOptions={{ headerShown: false }} />
     </RecoilRoot>
   );
